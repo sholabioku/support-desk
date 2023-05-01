@@ -7,7 +7,14 @@ const Ticket = require('../models/ticketModel');
 // @route GET /api/tickets
 // @access Private
 const getTickets = asyncHandler(async (req, res) => {
-  res.send('get tickets');
+  const user = await User.findById(req.user.id);
+  if (!user) {
+    res.status(404);
+    throw new Error('User not found');
+  }
+
+  const tickets = await Ticket.find({ user: req.user.id });
+  res.status(200).json(tickets);
 });
 
 // @desc Create new ticket
