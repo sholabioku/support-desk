@@ -8,8 +8,12 @@ const {
   deleteTicket,
   updateTicket,
 } = require('../middleware/ticketController');
+const noteRouter = require('./noteRoutes');
 
 const router = express.Router();
+
+// Re-route into note router
+router.use('/:ticketId/notes', noteRouter);
 
 router.route('/').get(protect, getTickets).post(protect, createTicket);
 router
