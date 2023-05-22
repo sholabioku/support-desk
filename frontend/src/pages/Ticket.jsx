@@ -8,7 +8,11 @@ import { closeTicket, getTicket } from '../features/tickets/ticketSlice';
 import Spinner from '../components/Spinner';
 import NoteItem from '../components/NoteItem';
 import BackButton from '../components/BackButton';
-import { getNotes, reset as notesReset } from '../features/notes/noteSlice';
+import {
+  createNote,
+  getNotes,
+  reset as notesReset,
+} from '../features/notes/noteSlice';
 
 const customStyles = {
   content: {
@@ -60,7 +64,7 @@ const Ticket = () => {
 
   const onNoteSubmit = (e) => {
     e.preventDefault();
-    console.log('submit');
+    dispatch(createNote({ noteText, ticketId }));
     closeModal();
   };
 
